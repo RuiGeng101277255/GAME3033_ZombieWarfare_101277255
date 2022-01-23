@@ -12,15 +12,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float jumpForce = 5.0f;
 
+    public readonly int movementXHash = Animator.StringToHash("MoveX");
+    public readonly int movementYHash = Animator.StringToHash("MoveY");
+    public readonly int isJumpingHash = Animator.StringToHash("isJumping");
+    public readonly int isRunningHash = Animator.StringToHash("isRunning");
+
     private PlayerController playerController;
     private Vector2 inputVector = Vector2.zero;
     private Vector3 moveDir = Vector3.zero;
     private Rigidbody playerRB;
+    private Animator playerAnimator;
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
         playerRB = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -44,20 +51,21 @@ public class PlayerMovement : MonoBehaviour
     public void OnMovementAction(InputValue value)
     {
         inputVector = value.Get<Vector2>();
-        Debug.Log(value);
+        playerAnimator.SetFloat(movementXHash, inputVector.x);
+        playerAnimator.SetFloat(movementYHash, inputVector.y);
     }
 
     public void OnRun(InputValue value)
     {
         playerController.isRunning = value.isPressed;
-        Debug.Log(value);
+        playerAnimator.SetBool(isRunningHash, playerController.isRunning);
     }
 
     public void OnJump(InputValue value)
     {
         playerController.isJumping = value.isPressed;
         playerRB.AddForce((transform.up + moveDir) * jumpForce, ForceMode.Impulse);
-        Debug.Log(value);
+        playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -65,5 +73,6 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground") && !playerController.isJumping) return;
 
         playerController.isJumping = false;
+        playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
     }
 }
