@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7727945369228106124}
+  - component: {fileID: 3605329493373576498}
   m_Layer: 0
   m_Name: AK47Prefab
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -37.517, y: 115.532, z: -41.736}
+--- !u!114 &3605329493373576498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727945369228106125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61be93ffbd41fdb4bb2499e0b8a93beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponGripLocation: {fileID: 4478961587778045982}
 --- !u!1001 &7727945368756597115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,10 +100,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 32.639
       objectReference: {fileID: 0}
+    - target: {fileID: 6131468971649399141, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131468971649399141, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.224
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
 --- !u!4 &7724068820133447913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4023067158591890, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+  m_PrefabInstance: {fileID: 7727945368756597115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4478961587778045982 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6131468971649399141, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
   m_PrefabInstance: {fileID: 7727945368756597115}
   m_PrefabAsset: {fileID: 0}
