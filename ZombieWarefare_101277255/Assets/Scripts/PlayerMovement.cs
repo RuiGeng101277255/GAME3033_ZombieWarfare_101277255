@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public readonly int movementYHash = Animator.StringToHash("MoveY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
     public readonly int isRunningHash = Animator.StringToHash("isRunning");
-    public readonly int isFirngHash = Animator.StringToHash("isFiring");
+    public readonly int isFiringHash = Animator.StringToHash("isFiring");
+    public readonly int isReloadingHash = Animator.StringToHash("isReloading");
 
     private PlayerController playerController;
     private Vector2 inputVector = Vector2.zero;
@@ -113,12 +114,13 @@ public class PlayerMovement : MonoBehaviour
     public void OnFire(InputValue value)
     {
         playerController.isFiring = value.isPressed;
-        playerAnimator.SetBool(isFirngHash, playerController.isFiring);
+        playerAnimator.SetBool(isFiringHash, playerController.isFiring);
     }
 
     public void OnReload(InputValue value)
     {
-
+        playerController.isReloading = value.isPressed;
+        playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
     }
 
     private void OnCollisionEnter(Collision collision)

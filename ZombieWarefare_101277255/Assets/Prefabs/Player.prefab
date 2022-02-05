@@ -1099,7 +1099,7 @@ MonoBehaviour:
   runSpeed: 10
   jumpForce: 5
   followTarget: {fileID: 8921754199266048478}
-  aimSensitivity: 1
+  aimSensitivity: 0.25
 --- !u!54 &5987092960549669291
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1130,6 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponToSpawn: {fileID: 7727945369228106125, guid: 2dee45b655bea674985d5a0638912bd5, type: 3}
   weaponSocket: {fileID: 322703450}
+  gripSocketLocationIK: {fileID: 0}
 --- !u!1 &4986680762088956172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +2056,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8921754199266048478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 1, z: 0.25}
+  m_LocalPosition: {x: 1, y: 1, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5395981771801385065}
