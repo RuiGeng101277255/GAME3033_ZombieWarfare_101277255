@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponHandleScript : MonoBehaviour
 {
     [Header("Weapon To Hold"), SerializeField]
     GameObject weaponToSpawn;
 
-    PlayerController playerController;
+    public PlayerController playerController;
     Animator playerWeaponAnimator;
     Sprite aimCrossSprite;
     WeaponComponentScript equippedWeapon;
@@ -17,9 +18,16 @@ public class WeaponHandleScript : MonoBehaviour
     [SerializeField]
     Transform gripSocketLocationIK;
 
+    public readonly int isFiringHash = Animator.StringToHash("isFiring");
+    public readonly int isReloadingHash = Animator.StringToHash("isReloading");
+
+    bool wasFiring = false;
+    bool firingPressed = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerController = GetComponent<PlayerController>();
         playerWeaponAnimator = GetComponent<Animator>();
         GameObject spawnedWeapon = Instantiate(weaponToSpawn, weaponSocket.transform.position, weaponSocket.transform.rotation, weaponSocket.transform);
         equippedWeapon = spawnedWeapon.GetComponent<WeaponComponentScript>();
@@ -37,5 +45,46 @@ public class WeaponHandleScript : MonoBehaviour
     {
         playerWeaponAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
         playerWeaponAnimator.SetIKPosition(AvatarIKGoal.LeftHand, gripSocketLocationIK.transform.position);
+    }
+
+    public void OnFire(InputValue value)
+    {
+        firingPressed = value.isPressed;
+
+        if (firingPressed)
+        {
+            StartFiring();
+        }
+        else
+        {
+            StopFiring();
+        }
+    }
+
+    public void StartFiring()
+    {
+        if (equippedWeapon.weaponStats.bulletsInClip <= 0) return;
+
+        playerWeaponAnimator.SetBool(isFiringHash, true);
+        playerController.isFiring = true;
+        equippedWeapon.StartFiring();
+    }
+
+    public void StopFiring()
+    {
+        playerWeaponAnimator.SetBool(isFiringHash, false);
+        playerController.isFiring = false;
+        equippedWeapon.StopFiring();
+    }
+
+    public void OnReload(InputValue value)
+    {
+        playerController.isReloading = value.isPressed;
+        playerWeaponAnimator.SetBool(isReloadingHash, playerController.isReloading);
+    }
+
+    public void StartReloading()
+    {
+
     }
 }
