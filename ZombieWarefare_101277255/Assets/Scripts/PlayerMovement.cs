@@ -20,6 +20,10 @@ public class PlayerMovement : MonoBehaviour
     private PlayerController playerController;
     private Vector2 inputVector = Vector2.zero;
     private Vector3 moveDir = Vector3.zero;
+    private Vector2 lookDir = Vector2.zero;
+
+    public float aimSensitivity = 1.0f;
+
     private Rigidbody playerRB;
     private Animator playerAnimator;
 
@@ -66,6 +70,27 @@ public class PlayerMovement : MonoBehaviour
         playerController.isJumping = value.isPressed;
         playerRB.AddForce((transform.up + moveDir) * jumpForce, ForceMode.Impulse);
         playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
+    }
+
+    public void OnAim(InputValue value)
+    {
+        playerController.isAiming = value.isPressed;
+    }
+
+    public void OnLook(InputValue value)
+    {
+        lookDir = value.Get<Vector2>();
+        //Animation adjustment for aim direction
+    }
+
+    public void OnFire(InputValue value)
+    {
+
+    }
+
+    public void OnReload(InputValue value)
+    {
+
     }
 
     private void OnCollisionEnter(Collision collision)
