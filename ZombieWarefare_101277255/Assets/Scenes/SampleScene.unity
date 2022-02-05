@@ -9996,10 +9996,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5577947454199565729, guid: 77a0b18fa447a2d468444b4b3fa759b9, type: 3}
-      propertyPath: weaponToSpawn
-      value: 
-      objectReference: {fileID: 7727945369228106125, guid: 2dee45b655bea674985d5a0638912bd5, type: 3}
+    - target: {fileID: 5577947455888637881, guid: 77a0b18fa447a2d468444b4b3fa759b9, type: 3}
+      propertyPath: aimSensitivity
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77a0b18fa447a2d468444b4b3fa759b9, type: 3}
 --- !u!4 &5577947454199565726 stripped

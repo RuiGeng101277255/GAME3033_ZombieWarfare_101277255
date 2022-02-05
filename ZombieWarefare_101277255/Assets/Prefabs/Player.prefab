@@ -1098,6 +1098,8 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 10
   jumpForce: 5
+  followTarget: {fileID: 8921754199266048478}
+  aimSensitivity: 1
 --- !u!54 &5987092960549669291
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1126,7 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf669744f7aed84f81ea86910611c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToSpawn: {fileID: 1900586067242068, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+  weaponToSpawn: {fileID: 7727945369228106125, guid: 2dee45b655bea674985d5a0638912bd5, type: 3}
   weaponSocket: {fileID: 322703450}
 --- !u!1 &4986680762088956172
 GameObject:

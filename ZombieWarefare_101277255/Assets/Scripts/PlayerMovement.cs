@@ -16,12 +16,14 @@ public class PlayerMovement : MonoBehaviour
     public readonly int movementYHash = Animator.StringToHash("MoveY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
     public readonly int isRunningHash = Animator.StringToHash("isRunning");
+    public readonly int isFirngHash = Animator.StringToHash("isFiring");
 
     private PlayerController playerController;
     private Vector2 inputVector = Vector2.zero;
     private Vector3 moveDir = Vector3.zero;
     private Vector2 lookDir = Vector2.zero;
 
+    public GameObject followTarget;
     public float aimSensitivity = 1.0f;
 
     private Rigidbody playerRB;
@@ -43,6 +45,31 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.x * aimSensitivity, Vector3.up);
+        followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.y * aimSensitivity, Vector3.left);
+
+        var angles = followTarget.transform.localEulerAngles;
+        angles.z = 0.0f;
+
+        var angle = followTarget.transform.localEulerAngles.x;
+
+        if (angle > 180.0f && angle < 340.0f)
+        {
+            angles.x = 340.0f;
+        }
+        else if (angle < 180.0f && angle > 40.0f)
+        {
+            angles.x = 40.0f;
+        }
+
+        followTarget.transform.localEulerAngles = angles;
+
+        transform.rotation = Quaternion.Euler(0.0f, followTarget.transform.rotation.eulerAngles.y, 0.0f);
+        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0.0f, 0.0f);
+
+
+
+
         if (playerController.isJumping) return;
         if (!(inputVector.magnitude > 0)) moveDir = Vector3.zero;
 
@@ -85,7 +112,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnFire(InputValue value)
     {
-
+        playerController.isFiring = value.isPressed;
+        playerAnimator.SetBool(isFirngHash, playerController.isFiring);
     }
 
     public void OnReload(InputValue value)
