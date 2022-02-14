@@ -58,6 +58,33 @@ public class WeaponComponentScript : MonoBehaviour
         weaponStats.bulletsInClip--;
         //switch statement based on the firing pattern
     }
+
+    public virtual void StartReloading()
+    {
+        isReloading = true;
+        ReloadWeapon();
+    }
+
+    public virtual void StopReloading()
+    {
+        isReloading= false;
+    }
+
+    protected void ReloadWeapon()
+    {
+        int bulletToReload = weaponStats.clipSize - weaponStats.totalBullets;
+
+        if (bulletToReload < 0)
+        {
+            weaponStats.bulletsInClip = weaponStats.clipSize;
+            weaponStats.totalBullets -= weaponStats.clipSize;
+        }
+        else
+        {
+            weaponStats.bulletsInClip = weaponStats.totalBullets;
+            weaponStats.totalBullets = 0;
+        }
+    }
 }
 
 public enum WeaponType
@@ -83,6 +110,7 @@ public struct WeaponStats
     public float weaponDamage;
     public int bulletsInClip;
     public int clipSize;
+    public int totalBullets;
     public float fireStartDelay;
     public float fireRate;
     public float fireDistance;

@@ -80,11 +80,30 @@ public class WeaponHandleScript : MonoBehaviour
     public void OnReload(InputValue value)
     {
         playerController.isReloading = value.isPressed;
-        playerWeaponAnimator.SetBool(isReloadingHash, playerController.isReloading);
+        StartReloading();
     }
 
     public void StartReloading()
     {
+        if (playerController.isFiring)
+        {
+            StopFiring();
+        }
+        if (equippedWeapon.weaponStats.totalBullets <= 0) return;
 
+        playerWeaponAnimator.SetBool(isReloadingHash, true);
+        equippedWeapon.StartReloading();
+
+        InvokeRepeating(nameof(StopReloading), 0, 0.1f);
+    }
+
+    public void StopReloading()
+    {
+        if (playerWeaponAnimator.GetBool(isReloadingHash)) return;
+
+        playerController.isReloading = false;
+        equippedWeapon.StopReloading();
+        playerWeaponAnimator.SetBool(isReloadingHash, false);
+        CancelInvoke(nameof(StopReloading));
     }
 }

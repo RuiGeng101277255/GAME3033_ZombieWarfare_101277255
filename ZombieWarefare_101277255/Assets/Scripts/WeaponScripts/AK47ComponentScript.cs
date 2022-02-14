@@ -33,6 +33,7 @@ public class AK47ComponentScript : WeaponComponentScript
 
                 Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1.0f);
             }
+            print("Bullet in clip: " + weaponStats.bulletsInClip);
         }
         else if (weaponStats.bulletsInClip <= 0)
         {
