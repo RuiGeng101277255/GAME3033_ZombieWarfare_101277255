@@ -63,7 +63,11 @@ public class WeaponHandleScript : MonoBehaviour
 
     public void StartFiring()
     {
-        if (equippedWeapon.weaponStats.bulletsInClip <= 0) return;
+        if (equippedWeapon.weaponStats.bulletsInClip <= 0)
+        {
+            StartReloading();
+            return;
+        }
 
         playerWeaponAnimator.SetBool(isFiringHash, true);
         playerController.isFiring = true;

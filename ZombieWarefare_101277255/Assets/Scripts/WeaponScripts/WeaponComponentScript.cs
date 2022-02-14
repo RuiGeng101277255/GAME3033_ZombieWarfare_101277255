@@ -5,8 +5,11 @@ using UnityEngine;
 public class WeaponComponentScript : MonoBehaviour
 {
     public Transform weaponGripLocation;
+    public Transform MuzzleFiringFXLocation;
 
     protected WeaponHandleScript weaponHandle;
+    [SerializeField]
+    protected ParticleSystem MuzzleParticle;
 
     [SerializeField]
     public WeaponStats weaponStats;
@@ -50,6 +53,10 @@ public class WeaponComponentScript : MonoBehaviour
     {
         isFiring= false;
         CancelInvoke(nameof(FireWeapon));
+        if (MuzzleParticle)
+        {
+            MuzzleParticle.Stop();
+        }
     }
 
     protected virtual void FireWeapon()
@@ -72,6 +79,11 @@ public class WeaponComponentScript : MonoBehaviour
 
     protected void ReloadWeapon()
     {
+        if (MuzzleParticle.isPlaying)
+        {
+            MuzzleParticle.Stop();
+        }
+
         int bulletToReload = weaponStats.clipSize - weaponStats.totalBullets;
 
         if (bulletToReload < 0)

@@ -23,6 +23,10 @@ public class AK47ComponentScript : WeaponComponentScript
         if (weaponStats.bulletsInClip > 0 && !isReloading && !weaponHandle.playerController.isRunning)
         {
             base.FireWeapon();
+            if (MuzzleParticle)
+            {
+                MuzzleParticle.Play();
+            }
             Ray screenRay = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, 0.0f));
 
             if (Physics.Raycast(screenRay, out RaycastHit hit, weaponStats.fireDistance, weaponStats.weaponHitLayers))
