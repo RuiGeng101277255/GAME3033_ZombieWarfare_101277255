@@ -22,6 +22,10 @@ public class WeaponComponentScript : MonoBehaviour
     void Awake()
     {
         mainCamera = Camera.main;
+        if (MuzzleParticle)
+        {
+            MuzzleParticle.Stop();
+        }
     }
 
     // Update is called once per frame
@@ -53,7 +57,7 @@ public class WeaponComponentScript : MonoBehaviour
     {
         isFiring= false;
         CancelInvoke(nameof(FireWeapon));
-        if (MuzzleParticle)
+        if (MuzzleParticle.isPlaying)
         {
             MuzzleParticle.Stop();
         }

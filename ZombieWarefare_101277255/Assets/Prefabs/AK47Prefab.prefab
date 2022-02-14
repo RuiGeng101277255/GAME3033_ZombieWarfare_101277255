@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponGripLocation: {fileID: 4478961587778045982}
   MuzzleFiringFXLocation: {fileID: 1172507249315418621}
-  MuzzleParticle: {fileID: 198076924919084778, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
+  MuzzleParticle: {fileID: 8784343087584217502}
   weaponStats:
     weaponName: AK47
     weaponDamage: 75
@@ -119,14 +119,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 32.639
       objectReference: {fileID: 0}
-    - target: {fileID: 8897626873053880454, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8897626873053880454, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.749
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
 --- !u!4 &7724068820133447913 stripped
@@ -144,68 +136,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8897626873053880454, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
   m_PrefabInstance: {fileID: 7727945368756597115}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8887841318019891060
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1172507249315418621}
-    m_Modifications:
-    - target: {fileID: 1320275964731592, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_Name
-      value: FX_Gunshot_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4056852919073388, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 199368111847782378, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 199996269509749434, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
+--- !u!198 &8784343087584217502 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1357672703758252261, guid: ad49a19d2c4adc94b838606a5d459f85, type: 3}
+  m_PrefabInstance: {fileID: 7727945368756597115}
+  m_PrefabAsset: {fileID: 0}
