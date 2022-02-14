@@ -32,6 +32,7 @@ public class WeaponHandleScript : MonoBehaviour
         GameObject spawnedWeapon = Instantiate(weaponToSpawn, weaponSocket.transform.position, weaponSocket.transform.rotation, weaponSocket.transform);
         equippedWeapon = spawnedWeapon.GetComponent<WeaponComponentScript>();
         equippedWeapon.Initialize(this);
+        PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
         gripSocketLocationIK = equippedWeapon.weaponGripLocation;
     }
 
