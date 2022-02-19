@@ -93,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
+        if (playerController.isJumping) return;
+
         playerController.isJumping = value.isPressed;
         playerRB.AddForce((transform.up + moveDir) * jumpForce, ForceMode.Impulse);
         playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
