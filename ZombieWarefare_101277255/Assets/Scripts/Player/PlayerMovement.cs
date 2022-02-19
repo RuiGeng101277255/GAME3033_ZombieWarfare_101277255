@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public readonly int movementYHash = Animator.StringToHash("MoveY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
     public readonly int isRunningHash = Animator.StringToHash("isRunning");
+    public readonly int AimVerticalHash = Animator.StringToHash("AimVertical");
 
     private PlayerController playerController;
     private Vector2 inputVector = Vector2.zero;
@@ -66,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0.0f, followTarget.transform.rotation.eulerAngles.y, 0.0f);
         followTarget.transform.localEulerAngles = new Vector3(angles.x, 0.0f, 0.0f);
 
-
+        //playerAnimator.SetFloat(AimVerticalHash, )
 
 
         if (playerController.isJumping) return;
