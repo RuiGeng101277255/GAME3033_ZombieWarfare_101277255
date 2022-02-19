@@ -34,17 +34,15 @@ public class PlayerMovement : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         playerRB = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-
-        if (!GameManager.instance.cursorActive)
-        {
-            AppEvents.InvokeOnMouseCursorEnable(false);
-        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!GameManager.Instance().cursorActive)
+        {
+            AppEvents.InvokeOnMouseCursorEnable(false);
+        }
     }
 
     // Update is called once per frame
