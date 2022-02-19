@@ -8,7 +8,7 @@ public class AppEvents
 
     public static event MouseCursorEnable MouseCursorEnabled;
 
-    public static void InvokeMouseCursorEnable(bool enabled)
+    public static void InvokeOnMouseCursorEnable(bool enabled)
     {
         MouseCursorEnabled?.Invoke(enabled);
     }
