@@ -56,6 +56,15 @@ public class PlayerMovement : MonoBehaviour
 
         var angle = followTarget.transform.localEulerAngles.x;
 
+        float min = -60.0f;
+        float max = 70.0f;
+        float range = max - min;
+        float offsetToZero = 0.0f - min;
+        float aimAngle = followTarget.transform.localEulerAngles.x;
+        aimAngle = (aimAngle > 180.0f) ? aimAngle - 360.0f : aimAngle;
+        float val = (aimAngle + offsetToZero) / (range);
+        playerAnimator.SetFloat(AimVerticalHash, val);
+
         if (angle > 180.0f && angle < 300.0f)
         {
             angles.x = 300.0f;
@@ -69,9 +78,6 @@ public class PlayerMovement : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0.0f, followTarget.transform.rotation.eulerAngles.y, 0.0f);
         followTarget.transform.localEulerAngles = new Vector3(angles.x, 0.0f, 0.0f);
-
-        //playerAnimator.SetFloat(AimVerticalHash, )
-
 
         if (playerController.isJumping) return;
         if (!(inputVector.magnitude > 0)) moveDir = Vector3.zero;
