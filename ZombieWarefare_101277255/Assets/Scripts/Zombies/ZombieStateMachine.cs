@@ -6,7 +6,7 @@ public class ZombieStateMachine : MonoBehaviour
 {
     public States currentState { get; private set; }
     protected Dictionary<ZombieStateType, States> states;
-    bool isIdle;
+    bool isIdle = true;
 
     private void Awake()
     {
