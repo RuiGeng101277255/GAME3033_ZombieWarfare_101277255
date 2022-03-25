@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AK47ComponentScript : WeaponComponentScript
 {
+    Vector3 HitLocation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +20,6 @@ public class AK47ComponentScript : WeaponComponentScript
 
     protected override void FireWeapon()
     {
-        Vector3 HitLocation;
-
         if (weaponStats.bulletsInClip > 0 && !isReloading && !weaponHandle.playerController.isRunning)
         {
             base.FireWeapon();
@@ -33,6 +33,8 @@ public class AK47ComponentScript : WeaponComponentScript
             {
                 HitLocation = hit.point;
 
+                DealDamage(hit);
+
                 Vector3 hitDirection = hit.point - mainCamera.transform.position;
 
                 Debug.DrawRay(mainCamera.transform.position, hitDirection.normalized * weaponStats.fireDistance, Color.red, 1.0f);
@@ -43,5 +45,16 @@ public class AK47ComponentScript : WeaponComponentScript
         {
             weaponHandle.StartReloading();
         }
+    }
+
+    void DealDamage(RaycastHit hitInfo)
+    {
+        IDamageable damageable = hitInfo.collider.GetComponent<IDamageable>();
+        damageable?.TakeDamage(weaponStats.weaponDamage);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(HitLocation, 0.1f);
     }
 }

@@ -21,7 +21,6 @@ public class WeaponHandleScript : MonoBehaviour
     public readonly int isFiringHash = Animator.StringToHash("isFiring");
     public readonly int isReloadingHash = Animator.StringToHash("isReloading");
 
-    bool wasFiring = false;
     bool firingPressed = false;
 
     // Start is called before the first frame update

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class ZombieComponent : MonoBehaviour
 {
-    public float damage = 5;
+    public float zombieDamage = 5;
 
     public NavMeshAgent zombieNavmeshAgent;
     public Animator zombieAnimator;
@@ -19,6 +19,13 @@ public class ZombieComponent : MonoBehaviour
         zombieSM = GetComponent<ZombieStateMachine>();
         Initialize(followTarget);
     }
+
+    private void Start()
+    {
+        followTarget = GameObject.FindGameObjectWithTag("Player");
+        Initialize(followTarget);
+    }
+
     public void Initialize(GameObject _followTarget)
     {
         followTarget = _followTarget;
