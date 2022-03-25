@@ -55,6 +55,6 @@ public class AK47ComponentScript : WeaponComponentScript
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(HitLocation, 0.1f);
+        Gizmos.DrawWireSphere(HitLocation, 0.2f);
     }
 }
