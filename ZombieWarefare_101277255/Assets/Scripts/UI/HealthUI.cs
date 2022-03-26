@@ -6,7 +6,6 @@ using TMPro;
 public class HealthUI : MonoBehaviour
 {
     public TextMeshProUGUI healthText;
-    public TextMeshProUGUI maxHealthText;
     HealthScript playerHealthScriptComp;
 
     private void OnHealthInitialized(HealthScript healthScriptComponent)
@@ -27,7 +26,6 @@ public class HealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = playerHealthScriptComp.CurrentHealth.ToString();
-        maxHealthText.text = playerHealthScriptComp.MaxHealth.ToString();
+        healthText.text = playerHealthScriptComp.CurrentHealth.ToString() + "/" + playerHealthScriptComp.MaxHealth.ToString();
     }
 }
