@@ -89,6 +89,8 @@ public class WeaponHandleScript : MonoBehaviour
 
     public void StartReloading()
     {
+        if (equippedWeapon.isReloading) return;
+
         if (playerController.isFiring)
         {
             StopFiring();
