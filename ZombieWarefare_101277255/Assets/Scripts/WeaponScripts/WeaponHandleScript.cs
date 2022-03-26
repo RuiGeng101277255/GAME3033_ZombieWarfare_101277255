@@ -89,7 +89,7 @@ public class WeaponHandleScript : MonoBehaviour
 
     public void StartReloading()
     {
-        if (equippedWeapon.isReloading) return;
+        if (equippedWeapon.isReloading || equippedWeapon.weaponStats.bulletsInClip == equippedWeapon.weaponStats.clipSize) return;
 
         if (playerController.isFiring)
         {

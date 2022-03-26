@@ -88,16 +88,18 @@ public class WeaponComponentScript : MonoBehaviour
             MuzzleParticle.Stop();
         }
 
-        int bulletToReload = weaponStats.clipSize - weaponStats.totalBullets;
+        // if there's a firing effect, hide it here
+        int bulletsToReload = weaponStats.totalBullets - (weaponStats.clipSize - weaponStats.bulletsInClip);
 
-        if (bulletToReload < 0)
+        // -------------- COD style reload, subtract bullets ----------------------
+        if (bulletsToReload > 0)
         {
+            weaponStats.totalBullets = bulletsToReload;
             weaponStats.bulletsInClip = weaponStats.clipSize;
-            weaponStats.totalBullets -= weaponStats.clipSize;
         }
         else
         {
-            weaponStats.bulletsInClip = weaponStats.totalBullets;
+            weaponStats.bulletsInClip += weaponStats.totalBullets;
             weaponStats.totalBullets = 0;
         }
     }
