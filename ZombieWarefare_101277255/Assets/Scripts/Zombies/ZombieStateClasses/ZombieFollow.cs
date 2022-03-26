@@ -24,7 +24,11 @@ public class ZombieFollow : ZombieStates
     public override void IntervalUpdate()
     {
         base.IntervalUpdate();
-        ownerZombie.zombieNavmeshAgent.SetDestination(followTarget.transform.position);
+
+        if (followTarget != null)
+        {
+            ownerZombie.zombieNavmeshAgent.SetDestination(followTarget.transform.position);
+        }
     }
 
     // Update is called once per frame
@@ -34,10 +38,13 @@ public class ZombieFollow : ZombieStates
         float moveZ = ownerZombie.zombieNavmeshAgent.velocity.normalized.z != 0f ? 1f : 0f;
         ownerZombie.zombieAnimator.SetFloat(movementHash, moveZ);
 
-        float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
-        if (distanceBetween < stoppingDistance)
+        if (followTarget != null)
         {
-            zombieSM.ChangeState(ZombieStateType.ATTACK);
+            float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
+            if (distanceBetween < stoppingDistance)
+            {
+                zombieSM.ChangeState(ZombieStateType.ATTACK);
+            }
         }
     }
 }

@@ -32,21 +32,27 @@ public class ZombieAttack : ZombieStates
     public override void IntervalUpdate()
     {
         base.IntervalUpdate();
-        damageableObject?.TakeDamage(ownerZombie.zombieDamage);
+
+        if (followTarget != null)
+        {
+            damageableObject?.TakeDamage(ownerZombie.zombieDamage);
+        }
     }
 
     // Update is called once per frame
 
     public override void Update()
     {
-        ownerZombie.transform.LookAt(followTarget.transform.position, Vector3.up);
-
-        float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
-        if (distanceBetween > attackRange)
+        if (followTarget != null)
         {
-            zombieSM.ChangeState(ZombieStateType.FOLLOW);
-        }
+            ownerZombie.transform.LookAt(followTarget.transform.position, Vector3.up);
 
+            float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
+            if (distanceBetween > attackRange)
+            {
+                zombieSM.ChangeState(ZombieStateType.FOLLOW);
+            }
+        }
     }
 
     public override void Exit()
