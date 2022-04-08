@@ -26,17 +26,21 @@ public class WeaponHandleScript : MonoBehaviour
     GameObject spawnedWeapon;
     public WeaponScriptableObject startingWeaponScriptableObj;
 
+    public WeaponAmmoUI weaponAmmoUI;
+
     // Start is called before the first frame update
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         playerWeaponAnimator = GetComponent<Animator>();
-        spawnedWeapon = Instantiate(weaponToSpawn, weaponSocket.transform.position, weaponSocket.transform.rotation, weaponSocket.transform);
-        equippedWeapon = spawnedWeapon.GetComponent<WeaponComponentScript>();
+        //EquipWeapon(startingWeaponScriptableObj);
+        //spawnedWeapon = Instantiate(weaponToSpawn, weaponSocket.transform.position, weaponSocket.transform.rotation, weaponSocket.transform);
+        playerController.inventory.AddItem(startingWeaponScriptableObj, 1);
+        //startingWeaponScriptableObj.UseItem(playerController);
+        //equippedWeapon = spawnedWeapon.GetComponent<WeaponComponentScript>();
         //For spawning with a weapon
-        equippedWeapon.Initialize(this, startingWeaponScriptableObj);
-        PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
-        gripSocketLocationIK = equippedWeapon.weaponGripLocation;
+        //equippedWeapon.Initialize(this, startingWeaponScriptableObj);
+        //PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
     }
 
     // Update is called once per frame
@@ -72,6 +76,8 @@ public class WeaponHandleScript : MonoBehaviour
 
     public void StartFiring()
     {
+        if (!equippedWeapon) return;
+
         if (equippedWeapon.weaponStats.bulletsInClip <= 0)
         {
             StartReloading();
@@ -85,6 +91,8 @@ public class WeaponHandleScript : MonoBehaviour
 
     public void StopFiring()
     {
+        if (!equippedWeapon) return;
+
         playerWeaponAnimator.SetBool(isFiringHash, false);
         playerController.isFiring = false;
         equippedWeapon.StopFiring();
@@ -127,6 +135,9 @@ public class WeaponHandleScript : MonoBehaviour
     public void EquipWeapon(WeaponScriptableObject weapon)
     {
         if (!weapon) return;
+
+        spawnedWeapon = Instantiate(weapon.itemPrefab, weaponSocket.transform.position, weaponSocket.transform.rotation, weaponSocket.transform);
+
         if (!spawnedWeapon) return;
 
         equippedWeapon = spawnedWeapon.GetComponent<WeaponComponentScript>();
@@ -135,6 +146,7 @@ public class WeaponHandleScript : MonoBehaviour
         equippedWeapon.Initialize(this, weapon);
         PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
         gripSocketLocationIK = equippedWeapon.weaponGripLocation;
+        weaponAmmoUI.OnWeaponEquipped(equippedWeapon);
     }
 
     public void UnEquipWeapon()
