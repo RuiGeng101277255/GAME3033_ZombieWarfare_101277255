@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public void OnInventory(InputValue value)
     {
         isInventoryOpen = !isInventoryOpen;
+        AppEvents.InvokeOnMouseCursorEnable(isInventoryOpen);
         OpenInventory(isInventoryOpen);
     }
 
