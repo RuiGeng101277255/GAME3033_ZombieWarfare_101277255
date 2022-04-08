@@ -18,7 +18,7 @@ public class WeaponScriptableObject : EquippableScriptableScript
         {
             //invoke OnWeaponEquipped and equip weapon from weapon holder on playercontroller
             playerController.weaponHandler.EquipWeapon(this);
-            PlayerEvents.InvokeOnWeaponEquipped(itemPrefab.GetComponent<WeaponComponentScript>());
+            //PlayerEvents.InvokeOnWeaponEquipped(itemPrefab.GetComponent<WeaponComponentScript>());
         }
 
         base.UseItem(playerController);
