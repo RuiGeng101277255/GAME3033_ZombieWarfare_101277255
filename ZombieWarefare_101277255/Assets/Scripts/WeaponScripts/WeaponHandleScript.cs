@@ -11,7 +11,7 @@ public class WeaponHandleScript : MonoBehaviour
     public PlayerController playerController;
     Animator playerWeaponAnimator;
     Sprite aimCrossSprite;
-    WeaponComponentScript equippedWeapon;
+    public WeaponComponentScript equippedWeapon;
 
     [SerializeField]
     GameObject weaponSocket;
@@ -23,14 +23,18 @@ public class WeaponHandleScript : MonoBehaviour
 
     bool firingPressed = false;
 
+    GameObject spawnedWeapon;
+    public WeaponScriptableObject startingWeaponScriptableObj;
+
     // Start is called before the first frame update
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         playerWeaponAnimator = GetComponent<Animator>();
-        GameObject spawnedWeapon = Instantiate(weaponToSpawn, weaponSocket.transform.position, weaponSocket.transform.rotation, weaponSocket.transform);
+        spawnedWeapon = Instantiate(weaponToSpawn, weaponSocket.transform.position, weaponSocket.transform.rotation, weaponSocket.transform);
         equippedWeapon = spawnedWeapon.GetComponent<WeaponComponentScript>();
-        equippedWeapon.Initialize(this);
+        //For spawning with a weapon
+        equippedWeapon.Initialize(this, startingWeaponScriptableObj);
         PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
         gripSocketLocationIK = equippedWeapon.weaponGripLocation;
     }
@@ -43,13 +47,18 @@ public class WeaponHandleScript : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        playerWeaponAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-        playerWeaponAnimator.SetIKPosition(AvatarIKGoal.LeftHand, gripSocketLocationIK.transform.position);
+        if (equippedWeapon)
+        {
+            playerWeaponAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+            playerWeaponAnimator.SetIKPosition(AvatarIKGoal.LeftHand, gripSocketLocationIK.transform.position);
+        }
     }
 
     public void OnFire(InputValue value)
     {
         firingPressed = value.isPressed;
+
+        if (!equippedWeapon) return;
 
         if (firingPressed)
         {
@@ -89,6 +98,8 @@ public class WeaponHandleScript : MonoBehaviour
 
     public void StartReloading()
     {
+        if (!equippedWeapon) return;
+
         if (equippedWeapon.isReloading || equippedWeapon.weaponStats.bulletsInClip == equippedWeapon.weaponStats.clipSize) return;
 
         if (playerController.isFiring)
@@ -111,5 +122,26 @@ public class WeaponHandleScript : MonoBehaviour
         equippedWeapon.StopReloading();
         playerWeaponAnimator.SetBool(isReloadingHash, false);
         CancelInvoke(nameof(StopReloading));
+    }
+
+    public void EquipWeapon(WeaponScriptableObject weapon)
+    {
+        if (!weapon) return;
+        if (!spawnedWeapon) return;
+
+        equippedWeapon = spawnedWeapon.GetComponent<WeaponComponentScript>();
+        if (!equippedWeapon) return;
+
+        equippedWeapon.Initialize(this, weapon);
+        PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
+        gripSocketLocationIK = equippedWeapon.weaponGripLocation;
+    }
+
+    public void UnEquipWeapon()
+    {
+        if (!equippedWeapon) return;
+
+        Destroy(equippedWeapon.gameObject);
+        equippedWeapon = null;
     }
 }

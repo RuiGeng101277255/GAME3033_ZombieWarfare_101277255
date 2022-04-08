@@ -34,9 +34,14 @@ public class WeaponComponentScript : MonoBehaviour
         
     }
 
-    public void Initialize(WeaponHandleScript handle)
+    public void Initialize(WeaponHandleScript handle, WeaponScriptableObject weaponScriptable)
     {
         weaponHandle = handle;
+
+        if (weaponScriptable)
+        {
+            weaponStats = weaponScriptable.weaponStats;
+        }
     }
 
     public virtual void StartFiring()

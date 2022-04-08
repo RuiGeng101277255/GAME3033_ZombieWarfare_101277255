@@ -59,6 +59,11 @@ public class ItemPickupCompScript : MonoBehaviour
             inventoryComponent.AddItem(itemInstance, itemAmount);
         }
 
+        if (itemInstance.itemCategory == ItemCategory.Weapon)
+        {
+            other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon.weaponStats.totalBullets += pickupItem.amountValue;
+        }
+
         Destroy(gameObject);
     }
 }
