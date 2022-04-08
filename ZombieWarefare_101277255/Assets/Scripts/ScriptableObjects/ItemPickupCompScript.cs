@@ -61,7 +61,10 @@ public class ItemPickupCompScript : MonoBehaviour
 
         if (itemInstance.itemCategory == ItemCategory.Weapon)
         {
-            other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon.weaponStats.totalBullets += pickupItem.amountValue;
+            if (other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon)
+            {
+                other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon.weaponStats.totalBullets += pickupItem.amountValue;
+            }
         }
 
         Destroy(gameObject);

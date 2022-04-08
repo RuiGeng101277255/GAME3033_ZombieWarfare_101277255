@@ -124,6 +124,8 @@ public class WeaponHandleScript : MonoBehaviour
 
     public void StopReloading()
     {
+        if (!equippedWeapon) return;
+
         if (playerWeaponAnimator.GetBool(isReloadingHash)) return;
 
         playerController.isReloading = false;
