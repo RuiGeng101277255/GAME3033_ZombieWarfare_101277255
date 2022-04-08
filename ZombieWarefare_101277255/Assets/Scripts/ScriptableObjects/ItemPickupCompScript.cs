@@ -35,6 +35,10 @@ public class ItemPickupCompScript : MonoBehaviour
         {
             itemInstance.SetAmount(itemAmount);
         }
+        else
+        {
+            itemInstance.SetAmount(pickupItem.amountValue);
+        }
         ApplyMesh();
     }
 
@@ -47,6 +51,13 @@ public class ItemPickupCompScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
+        InventoryComponent inventoryComponent = other.GetComponent<InventoryComponent>();
+
+        if (inventoryComponent)
+        {
+            inventoryComponent.AddItem(itemInstance, itemAmount);
+        }
 
         Destroy(gameObject);
     }
