@@ -28,7 +28,7 @@ public class WeaponHandleScript : MonoBehaviour
 
     public WeaponAmmoUI weaponAmmoUI;
 
-    List<WeaponStats> weaponAmmoData;
+    public Dictionary<WeaponType, WeaponStats> weaponAmmoData;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +43,8 @@ public class WeaponHandleScript : MonoBehaviour
         //For spawning with a weapon
         //equippedWeapon.Initialize(this, startingWeaponScriptableObj);
         //PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
+        weaponAmmoData = new Dictionary<WeaponType,WeaponStats>();
+        weaponAmmoData.Add(startingWeaponScriptableObj.weaponStats.weaponType, startingWeaponScriptableObj.weaponStats);
     }
 
     // Update is called once per frame
