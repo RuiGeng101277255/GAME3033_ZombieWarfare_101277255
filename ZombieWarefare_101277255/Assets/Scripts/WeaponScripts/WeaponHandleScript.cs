@@ -28,6 +28,8 @@ public class WeaponHandleScript : MonoBehaviour
 
     public WeaponAmmoUI weaponAmmoUI;
 
+    List<WeaponStats> weaponAmmoData;
+
     // Start is called before the first frame update
     void Start()
     {

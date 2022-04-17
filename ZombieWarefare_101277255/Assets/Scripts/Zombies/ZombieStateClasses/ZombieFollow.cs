@@ -46,5 +46,9 @@ public class ZombieFollow : ZombieStates
                 zombieSM.ChangeState(ZombieStateType.ATTACK);
             }
         }
+        else
+        {
+            zombieSM.ChangeState(ZombieStateType.IDLE);
+        }
     }
 }

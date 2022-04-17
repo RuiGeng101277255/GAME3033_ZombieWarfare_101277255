@@ -11,4 +11,8 @@ public class PlayerHealthScript : HealthScript
         PlayerEvents.InvokeOnHealthInitialized(this);
     }
 
+    public override void Destroy()
+    {
+        //base.Destroy();
+    }
 }
