@@ -54,6 +54,8 @@ public class ItemPickupCompScript : MonoBehaviour
 
         InventoryComponent inventoryComponent = other.GetComponent<InventoryComponent>();
 
+        WeaponHandleScript handle = other.GetComponent<WeaponHandleScript>();
+
         if (inventoryComponent)
         {
             inventoryComponent.AddItem(itemInstance, itemAmount);
@@ -61,9 +63,20 @@ public class ItemPickupCompScript : MonoBehaviour
 
         if (itemInstance.itemCategory == ItemCategory.Weapon)
         {
-            if (other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon)
+            WeaponComponentScript tempWeaponComp = itemInstance.itemPrefab.GetComponent<WeaponComponentScript>();
+
+            //if ((handle.weaponAmmoData.ContainsKey(tempWeaponComp.weaponStats.weaponType)) && (other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon))
+            if (handle.weaponAmmoData.ContainsKey(tempWeaponComp.weaponStats.weaponType))
             {
+                WeaponStats tempStats = handle.weaponAmmoData[tempWeaponComp.weaponStats.weaponType];
+                tempStats.totalBullets += itemInstance.amountValue;
+                other.GetComponentInChildren<WeaponHandleScript>().weaponAmmoData[tempWeaponComp.weaponStats.weaponType] = tempStats;
                 //other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon.weaponStats.totalBullets += pickupItem.amountValue;
+
+                if (handle.equippedWeapon != null)
+                {
+                    handle.equippedWeapon.weaponStats = handle.weaponAmmoData[tempWeaponComp.weaponStats.weaponType];
+                }
             }
         }
 

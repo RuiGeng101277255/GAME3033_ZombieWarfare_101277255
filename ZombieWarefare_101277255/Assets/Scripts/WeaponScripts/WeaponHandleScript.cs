@@ -123,6 +123,8 @@ public class WeaponHandleScript : MonoBehaviour
         playerWeaponAnimator.SetBool(isReloadingHash, true);
         equippedWeapon.StartReloading();
 
+        weaponAmmoData[equippedWeapon.weaponStats.weaponType] = equippedWeapon.weaponStats;
+
         InvokeRepeating(nameof(StopReloading), 0, 0.1f);
     }
 
@@ -150,6 +152,12 @@ public class WeaponHandleScript : MonoBehaviour
         if (!equippedWeapon) return;
 
         equippedWeapon.Initialize(this, weapon);
+
+        if (weaponAmmoData.ContainsKey(equippedWeapon.weaponStats.weaponType))
+        {
+            equippedWeapon.weaponStats = weaponAmmoData[equippedWeapon.weaponStats.weaponType];
+        }
+
         PlayerEvents.InvokeOnWeaponEquipped(equippedWeapon);
         gripSocketLocationIK = equippedWeapon.weaponGripLocation;
         weaponAmmoUI.OnWeaponEquipped(equippedWeapon);
@@ -158,6 +166,11 @@ public class WeaponHandleScript : MonoBehaviour
     public void UnEquipWeapon()
     {
         if (!equippedWeapon) return;
+
+        if (weaponAmmoData.ContainsKey(equippedWeapon.weaponStats.weaponType))
+        {
+            weaponAmmoData[equippedWeapon.weaponStats.weaponType] = equippedWeapon.weaponStats;
+        }
 
         Destroy(equippedWeapon.gameObject);
         equippedWeapon = null;
