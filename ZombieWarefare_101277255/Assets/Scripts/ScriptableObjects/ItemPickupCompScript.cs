@@ -63,7 +63,7 @@ public class ItemPickupCompScript : MonoBehaviour
         {
             if (other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon)
             {
-                other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon.weaponStats.totalBullets += pickupItem.amountValue;
+                //other.GetComponentInChildren<WeaponHandleScript>().equippedWeapon.weaponStats.totalBullets += pickupItem.amountValue;
             }
         }
 

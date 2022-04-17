@@ -31,4 +31,12 @@ public class HealthScript : MonoBehaviour, IDamageable
             Destroy();
         }
     }
+
+    public virtual void HealDamage(int healValue)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth = Mathf.Clamp(currentHealth + healValue, 0, maxHealth);
+        }
+    }
 }
