@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float jumpForce = 5.0f;
 
+    public GameObject pausePanel;
+
     public readonly int movementXHash = Animator.StringToHash("MoveX");
     public readonly int movementYHash = Animator.StringToHash("MoveY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
@@ -48,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance().gamePaused) return;
+
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.x * aimSensitivity, Vector3.up);
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.y * aimSensitivity, Vector3.left);
 
@@ -88,6 +92,13 @@ public class PlayerMovement : MonoBehaviour
         transform.position += movementVec;
     }
 
+    public void PauseGame(bool pause)
+    {
+        pausePanel.gameObject.SetActive(pause);
+        AppEvents.InvokeOnGamePauseEnable(pause);
+        AppEvents.InvokeOnMouseCursorEnable(pause);
+    }
+
     public void OnMovementAction(InputValue value)
     {
         inputVector = value.Get<Vector2>();
@@ -121,6 +132,10 @@ public class PlayerMovement : MonoBehaviour
         //Animation adjustment for aim direction
     }
 
+    public void OnPauseGame(InputValue value)
+    {
+        PauseGame(!GameManager.Instance().gamePaused);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool cursorActive = true;
+    public bool gamePaused = false;
 
     private static GameManager instance;
 
@@ -37,13 +38,21 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = isEnable ? CursorLockMode.None: CursorLockMode.Locked;
     }
 
+    void EnableGamePause(bool pause)
+    {
+        gamePaused = pause;
+        Time.timeScale = pause ? 0.0f : 1.0f;
+    }
+
     private void OnEnable()
     {
         AppEvents.MouseCursorEnabled += EnableCursor;
+        AppEvents.GamePauseEnabled += EnableGamePause;
     }
 
     private void OnDisable()
     {
         AppEvents.MouseCursorEnabled -= EnableCursor;
+        AppEvents.GamePauseEnabled -= EnableGamePause;
     }
 }
