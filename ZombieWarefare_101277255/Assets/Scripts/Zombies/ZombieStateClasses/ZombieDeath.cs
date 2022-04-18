@@ -6,6 +6,7 @@ public class ZombieDeath : ZombieStates
 {
     int movementHash = Animator.StringToHash("Movement");
     int isDeadHash = Animator.StringToHash("isDead");
+    bool deathCounted = false;
     public ZombieDeath(ZombieComponent zombie, ZombieStateMachine zombieSM) : base(zombie, zombieSM)
     {
 
@@ -19,6 +20,13 @@ public class ZombieDeath : ZombieStates
 
         ownerZombie.zombieAnimator.SetFloat(movementHash, 0);
         ownerZombie.zombieAnimator.SetBool(isDeadHash, true);
+
+        if (!deathCounted)
+        {
+            GameManager.Instance().currentWaveZombieCount = Mathf.Clamp(GameManager.Instance().currentWaveZombieCount--, 0, GameManager.Instance().currentWaveZombieCount);
+            GameManager.Instance().totalZombiesKilled++;
+            deathCounted = true;
+        }
     }
 
     public override void Exit()

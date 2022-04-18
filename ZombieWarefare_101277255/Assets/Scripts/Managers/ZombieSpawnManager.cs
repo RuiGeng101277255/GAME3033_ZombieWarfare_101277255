@@ -13,10 +13,7 @@ public class ZombieSpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < zombiesSpawnCount; i++)
-        {
-            SpawnZombie();
-        }
+
     }
 
     void SpawnZombie()
@@ -29,5 +26,13 @@ public class ZombieSpawnManager : MonoBehaviour
         GameObject zombie = Instantiate(zombieToSpawn, spawnVolume.GetPositionInBoxBounds(), spawnVolume.transform.rotation);
 
         //zombie.GetComponent<ZombieComponent>().Initialize(followGameObject);
+    }
+
+    public void spawnNumberOfZombies(int number)
+    {
+        for (int i = 0;i < number;i++)
+        {
+            SpawnZombie();
+        }
     }
 }
