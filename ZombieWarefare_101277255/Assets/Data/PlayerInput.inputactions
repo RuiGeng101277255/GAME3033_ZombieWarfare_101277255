@@ -68,14 +68,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "PauseGame",
-                    "type": "Button",
-                    "id": "c23d3f0f-97b3-484a-8cf6-ada34292c4fc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -208,17 +200,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a0b506ba-2da8-4816-8040-40fc637344c9",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PauseGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
