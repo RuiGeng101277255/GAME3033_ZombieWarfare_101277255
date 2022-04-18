@@ -26,9 +26,6 @@ public class HealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance().gamePaused)
-        {
-            healthText.text = playerHealthScriptComp.CurrentHealth.ToString() + "/" + playerHealthScriptComp.MaxHealth.ToString();
-        }
+        healthText.text = playerHealthScriptComp.CurrentHealth.ToString() + "/" + playerHealthScriptComp.MaxHealth.ToString();
     }
 }

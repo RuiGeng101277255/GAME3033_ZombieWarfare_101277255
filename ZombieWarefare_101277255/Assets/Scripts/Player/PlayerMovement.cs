@@ -48,47 +48,44 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance().gamePaused)
+        followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.x * aimSensitivity, Vector3.up);
+        followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.y * aimSensitivity, Vector3.left);
+
+        var angles = followTarget.transform.localEulerAngles;
+        angles.z = 0.0f;
+
+        var angle = followTarget.transform.localEulerAngles.x;
+
+        float min = -60.0f;
+        float max = 70.0f;
+        float range = max - min;
+        float offsetToZero = 0.0f - min;
+        float aimAngle = followTarget.transform.localEulerAngles.x;
+        aimAngle = (aimAngle > 180.0f) ? aimAngle - 360.0f : aimAngle;
+        float val = (aimAngle + offsetToZero) / (range);
+        playerAnimator.SetFloat(AimVerticalHash, val);
+
+        if (angle > 180.0f && angle < 300.0f)
         {
-            followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.x * aimSensitivity, Vector3.up);
-            followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.y * aimSensitivity, Vector3.left);
-
-            var angles = followTarget.transform.localEulerAngles;
-            angles.z = 0.0f;
-
-            var angle = followTarget.transform.localEulerAngles.x;
-
-            float min = -60.0f;
-            float max = 70.0f;
-            float range = max - min;
-            float offsetToZero = 0.0f - min;
-            float aimAngle = followTarget.transform.localEulerAngles.x;
-            aimAngle = (aimAngle > 180.0f) ? aimAngle - 360.0f : aimAngle;
-            float val = (aimAngle + offsetToZero) / (range);
-            playerAnimator.SetFloat(AimVerticalHash, val);
-
-            if (angle > 180.0f && angle < 300.0f)
-            {
-                angles.x = 300.0f;
-            }
-            else if (angle < 180.0f && angle > 70.0f)
-            {
-                angles.x = 70.0f;
-            }
-
-            followTarget.transform.localEulerAngles = angles;
-
-            transform.rotation = Quaternion.Euler(0.0f, followTarget.transform.rotation.eulerAngles.y, 0.0f);
-            followTarget.transform.localEulerAngles = new Vector3(angles.x, 0.0f, 0.0f);
-
-            if (playerController.isJumping) return;
-            if (!(inputVector.magnitude > 0)) moveDir = Vector3.zero;
-
-            moveDir = transform.forward * inputVector.y + transform.right * inputVector.x;
-            float currentSpeed = playerController.isRunning ? runSpeed : walkSpeed;
-            Vector3 movementVec = moveDir * (currentSpeed * Time.deltaTime);
-            transform.position += movementVec;
+            angles.x = 300.0f;
         }
+        else if (angle < 180.0f && angle > 70.0f)
+        {
+            angles.x = 70.0f;
+        }
+
+        followTarget.transform.localEulerAngles = angles;
+
+        transform.rotation = Quaternion.Euler(0.0f, followTarget.transform.rotation.eulerAngles.y, 0.0f);
+        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0.0f, 0.0f);
+
+        if (playerController.isJumping) return;
+        if (!(inputVector.magnitude > 0)) moveDir = Vector3.zero;
+
+        moveDir = transform.forward * inputVector.y + transform.right * inputVector.x;
+        float currentSpeed = playerController.isRunning ? runSpeed : walkSpeed;
+        Vector3 movementVec = moveDir *  (currentSpeed * Time.deltaTime);
+        transform.position += movementVec;
     }
 
     public void OnMovementAction(InputValue value)

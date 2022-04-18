@@ -12,6 +12,12 @@ public class SpawnerManager : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     public Vector3 GetPositionInBoxBounds()
     {
         Bounds boxBounds = boxCollider.bounds;

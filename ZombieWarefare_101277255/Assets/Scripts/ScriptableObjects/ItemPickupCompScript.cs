@@ -22,6 +22,12 @@ public class ItemPickupCompScript : MonoBehaviour
         InstantiateItem();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     void InstantiateItem()
     {
         itemInstance = Instantiate(pickupItem);

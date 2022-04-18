@@ -31,15 +31,12 @@ public class WeaponAmmoUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance().gamePaused)
+        if (!weaponComponent)
         {
-            if (!weaponComponent)
-            {
-                return;
-            }
-
-            WeaponNameText.text = weaponComponent.weaponStats.weaponName;
-            WeaponAmmoText.text = weaponComponent.weaponStats.bulletsInClip + "/" + weaponComponent.weaponStats.totalBullets;
+            return;
         }
+
+        WeaponNameText.text = weaponComponent.weaponStats.weaponName;
+        WeaponAmmoText.text = weaponComponent.weaponStats.bulletsInClip + "/" + weaponComponent.weaponStats.totalBullets;
     }
 }

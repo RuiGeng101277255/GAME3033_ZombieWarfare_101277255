@@ -9,4 +9,10 @@ public class GameCanvas : GameHUDWidget
     {
         
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

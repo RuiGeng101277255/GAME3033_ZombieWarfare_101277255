@@ -43,17 +43,14 @@ public class ZombieAttack : ZombieStates
 
     public override void Update()
     {
-        if (!GameManager.Instance().gamePaused)
+        if (followTarget != null)
         {
-            if (followTarget != null)
-            {
-                ownerZombie.transform.LookAt(followTarget.transform.position, Vector3.up);
+            ownerZombie.transform.LookAt(followTarget.transform.position, Vector3.up);
 
-                float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
-                if (distanceBetween > attackRange)
-                {
-                    zombieSM.ChangeState(ZombieStateType.FOLLOW);
-                }
+            float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
+            if (distanceBetween > attackRange)
+            {
+                zombieSM.ChangeState(ZombieStateType.FOLLOW);
             }
         }
     }

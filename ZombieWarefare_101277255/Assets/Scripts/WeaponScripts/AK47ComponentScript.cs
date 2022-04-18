@@ -12,6 +12,12 @@ public class AK47ComponentScript : WeaponComponentScript
         
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     protected override void FireWeapon()
     {
         if (weaponStats.bulletsInClip > 0 && !isReloading && !weaponHandle.playerController.isRunning)
