@@ -28,12 +28,6 @@ public class WeaponComponentScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Initialize(WeaponHandleScript handle, WeaponScriptableObject weaponScriptable)
     {
         weaponHandle = handle;

@@ -47,12 +47,6 @@ public class WeaponHandleScript : MonoBehaviour
         weaponAmmoData.Add(startingWeaponScriptableObj.weaponStats.weaponType, startingWeaponScriptableObj.weaponStats);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnAnimatorIK(int layerIndex)
     {
         if (equippedWeapon)

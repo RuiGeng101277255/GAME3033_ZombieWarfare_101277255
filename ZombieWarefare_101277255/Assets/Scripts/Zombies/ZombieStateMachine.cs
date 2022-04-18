@@ -68,9 +68,12 @@ public class ZombieStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isIdle)
+        if (!GameManager.Instance().gamePaused)
         {
-            currentState.Update();
+            if (!isIdle)
+            {
+                currentState.Update();
+            }
         }
     }
 }
