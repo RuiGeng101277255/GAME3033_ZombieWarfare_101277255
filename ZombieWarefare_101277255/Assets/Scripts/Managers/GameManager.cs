@@ -6,17 +6,14 @@ public class GameManager : MonoBehaviour
 {
     public bool cursorActive = true;
     public bool gamePaused = false;
-    public int currentZombieWaves = 0;
-    public int totalZombieWaves = 3;
-    public int currentWaveZombieCount = 0;
-    public float currentTime = 0.0f;
-    public float totalTimePerWave = 10.0f;
-
-    public int totalZombiesKilled = 0;
-
-    public bool hasWon = false;
-
-    private bool isInGame = true;
+    public static int currentZombieWaves = 0;
+    public static int totalZombieWaves = 3;
+    public static int currentWaveZombieCount = 0;
+    public static float currentTime = 0.0f;
+    public static float totalTimePerWave = 10.0f;
+    public static int totalZombiesKilled = 0;
+    public static bool hasWon = false;
+    public static bool isInGame = true;
 
     private ZombieSpawnManager[] allZombieSpawners;
 
@@ -132,6 +129,52 @@ public class GameManager : MonoBehaviour
         currentWaveZombieCount = 0;
         currentTime = 0.0f;
         totalZombiesKilled = 0;
-        isInGame = true;
+        isInGame = false;
+    }
+
+    public void addToTotalZombiesKilled()
+    {
+        currentWaveZombieCount = Mathf.Clamp(currentWaveZombieCount--, 0, currentWaveZombieCount);
+        totalZombiesKilled++;
+    }
+
+    public void setIsInGame(bool ingame)
+    {
+        isInGame = ingame;
+    }
+
+    public bool getIsInGame()
+    {
+        return isInGame;
+    }
+
+    public int getCurrentTime()
+    {
+        return (int)currentTime;
+    }
+
+    public int getCurrentZombieWave()
+    {
+        return currentZombieWaves;
+    }
+
+    public int getTotalZombieWaves()
+    {
+        return totalZombieWaves;
+    }
+
+    public int getCurrentWaveZombieCount()
+    {
+        return currentWaveZombieCount;
+    }
+
+    public int getTotalZombiesKilled()
+    {
+        return totalZombiesKilled;
+    }
+
+    public bool getHasPlayerWon()
+    {
+        return hasWon;
     }
 }

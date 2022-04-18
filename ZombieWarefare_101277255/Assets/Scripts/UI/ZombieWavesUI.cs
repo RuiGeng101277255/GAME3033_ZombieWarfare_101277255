@@ -17,8 +17,8 @@ public class ZombieWavesUI : MonoBehaviour
 
     void UpdateTextContents()
     {
-        TimerText.text = "Time Remaining: " + (int)GameManager.Instance().currentTime;
-        ZombieWaveText.text = "Wave: " + GameManager.Instance().currentZombieWaves + "/" + GameManager.Instance().totalZombieWaves;
-        ZombiesLeftText.text = "Zombies Left In Wave: " + GameManager.Instance().currentWaveZombieCount;
+        TimerText.text = "Time Remaining: " + GameManager.Instance().getCurrentTime() + "s";
+        ZombieWaveText.text = "Wave: " + GameManager.Instance().getCurrentZombieWave() + "/" + GameManager.Instance().getTotalZombieWaves();
+        ZombiesLeftText.text = "Zombies Left In Wave: " + GameManager.Instance().getCurrentWaveZombieCount();
     }
 }

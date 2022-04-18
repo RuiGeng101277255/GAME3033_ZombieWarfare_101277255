@@ -23,8 +23,7 @@ public class ZombieDeath : ZombieStates
 
         if (!deathCounted)
         {
-            GameManager.Instance().currentWaveZombieCount = Mathf.Clamp(GameManager.Instance().currentWaveZombieCount--, 0, GameManager.Instance().currentWaveZombieCount);
-            GameManager.Instance().totalZombiesKilled++;
+            GameManager.Instance().addToTotalZombiesKilled();
             deathCounted = true;
         }
     }

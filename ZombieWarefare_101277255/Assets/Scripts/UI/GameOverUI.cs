@@ -13,10 +13,15 @@ public class GameOverUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        conditionText.text = (GameManager.Instance().hasWon) ? "YOU SURVIVED!" : "YOU DIED";
-        timerText.text = "Last Wave Time Left: " + (int)GameManager.Instance().currentTime + "s";
-        waveText.text = "Waves Completed: " + GameManager.Instance().currentZombieWaves + "/" + GameManager.Instance().totalZombieWaves;
-        totalZombiesKilledText.text = "Total Zombies Killed: " + GameManager.Instance().totalZombiesKilled;
+        if (!GameManager.Instance().cursorActive)
+        {
+            AppEvents.InvokeOnMouseCursorEnable(true);
+        }
+
+        conditionText.text = (GameManager.Instance().getHasPlayerWon()) ? "YOU SURVIVED!" : "YOU DIED";
+        timerText.text = "Last Wave Time Left: " + (int)GameManager.Instance().getCurrentTime() + "s";
+        waveText.text = "Waves Completed: " + GameManager.Instance().getCurrentZombieWave() + "/" + GameManager.Instance().getTotalZombieWaves();
+        totalZombiesKilledText.text = "Total Zombies Killed: " + GameManager.Instance().getTotalZombiesKilled();
     }
 
     // Update is called once per frame

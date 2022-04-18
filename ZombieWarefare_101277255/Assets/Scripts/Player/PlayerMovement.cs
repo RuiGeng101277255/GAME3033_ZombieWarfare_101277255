@@ -41,16 +41,26 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!GameManager.Instance().cursorActive)
-        {
-            AppEvents.InvokeOnMouseCursorEnable(false);
-        }
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance().gamePaused) return;
+
+        if (!GameManager.Instance().cursorActive)
+        {
+            AppEvents.InvokeOnMouseCursorEnable(false);
+            print("cursor set to false");
+        }
+
+        if (!GameManager.Instance().getIsInGame())
+        {
+            GameManager.Instance().setIsInGame(true);
+            print("set to true in game");
+        }
 
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.x * aimSensitivity, Vector3.up);
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookDir.y * aimSensitivity, Vector3.left);
