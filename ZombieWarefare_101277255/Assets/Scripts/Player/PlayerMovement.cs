@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float jumpForce = 5.0f;
 
+    public GameObject pausePanel;
+
     public readonly int movementXHash = Animator.StringToHash("MoveX");
     public readonly int movementYHash = Animator.StringToHash("MoveY");
     public readonly int isJumpingHash = Animator.StringToHash("isJumping");
@@ -91,39 +93,64 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void PauseGame(bool pause)
+    {
+        pausePanel.gameObject.SetActive(pause);
+        AppEvents.InvokeOnGamePauseEnable(pause);
+    }
+
     public void OnMovementAction(InputValue value)
     {
-        inputVector = value.Get<Vector2>();
-        playerAnimator.SetFloat(movementXHash, inputVector.x);
-        playerAnimator.SetFloat(movementYHash, inputVector.y);
+        if (!GameManager.Instance().gamePaused)
+        {
+            inputVector = value.Get<Vector2>();
+            playerAnimator.SetFloat(movementXHash, inputVector.x);
+            playerAnimator.SetFloat(movementYHash, inputVector.y);
+        }
     }
 
     public void OnRun(InputValue value)
     {
-        playerController.isRunning = value.isPressed;
-        playerAnimator.SetBool(isRunningHash, playerController.isRunning);
+        if (!GameManager.Instance().gamePaused)
+        {
+            playerController.isRunning = value.isPressed;
+            playerAnimator.SetBool(isRunningHash, playerController.isRunning);
+        }
     }
 
     public void OnJump(InputValue value)
     {
-        if (playerController.isJumping) return;
+        if (!GameManager.Instance().gamePaused)
+        {
+            if (playerController.isJumping) return;
 
-        playerController.isJumping = value.isPressed;
-        playerRB.AddForce((transform.up + moveDir) * jumpForce, ForceMode.Impulse);
-        playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
+            playerController.isJumping = value.isPressed;
+            playerRB.AddForce((transform.up + moveDir) * jumpForce, ForceMode.Impulse);
+            playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
+        }
     }
 
     public void OnAim(InputValue value)
     {
-        playerController.isAiming = value.isPressed;
+        if (!GameManager.Instance().gamePaused)
+        {
+            playerController.isAiming = value.isPressed;
+        }
     }
 
     public void OnLook(InputValue value)
     {
-        lookDir = value.Get<Vector2>();
-        //Animation adjustment for aim direction
+        if (!GameManager.Instance().gamePaused)
+        {
+            lookDir = value.Get<Vector2>();
+            //Animation adjustment for aim direction
+        }
     }
 
+    public void OnPauseGame(InputValue value)
+    {
+        PauseGame(!GameManager.Instance().gamePaused);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
