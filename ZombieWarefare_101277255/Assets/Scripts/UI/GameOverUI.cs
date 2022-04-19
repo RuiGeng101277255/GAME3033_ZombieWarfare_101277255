@@ -18,7 +18,7 @@ public class GameOverUI : MonoBehaviour
             AppEvents.InvokeOnMouseCursorEnable(true);
         }
 
-        conditionText.text = (GameManager.Instance().getHasPlayerWon()) ? "YOU SURVIVED!" : "YOU DIED";
+        conditionText.text = (GameManager.Instance().getHasPlayerWon()) ? "YOU SURVIVED!" : "YOU LOST!";
         timerText.text = "Last Wave Time Left: " + (int)GameManager.Instance().getCurrentTime() + "s";
         waveText.text = "Waves Completed: " + GameManager.Instance().getCurrentZombieWave() + "/" + GameManager.Instance().getTotalZombieWaves();
         totalZombiesKilledText.text = "Total Zombies Killed: " + GameManager.Instance().getTotalZombiesKilled();

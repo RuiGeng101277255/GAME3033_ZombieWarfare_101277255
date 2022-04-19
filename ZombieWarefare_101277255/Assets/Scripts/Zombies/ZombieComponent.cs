@@ -12,8 +12,10 @@ public class ZombieComponent : MonoBehaviour
     public ZombieStateMachine zombieSM;
     public GameObject followTarget;
 
-    public AudioSource ZombieGrowl;
-    public AudioSource ZombieDeath;
+    public AudioSource ZombieGrowlSFX;
+    public AudioSource ZombieDeathSFX;
+
+    bool hasZombieDied = false;
 
     private void Awake()
     {
@@ -26,6 +28,30 @@ public class ZombieComponent : MonoBehaviour
     {
         followTarget = GameObject.FindGameObjectWithTag("Player");
         Initialize(followTarget);
+    }
+
+    private void Update()
+    {
+        updateSFXStates();
+    }
+
+    void updateSFXStates()
+    {
+        if (zombieSM.currentState.GetType() == typeof(ZombieFollow))
+        {
+            if (!ZombieGrowlSFX.isPlaying)
+            {
+                ZombieGrowlSFX.PlayDelayed(Random.Range(0.0f, 5.0f));
+            }
+        }
+        else if (zombieSM.currentState.GetType() == typeof(ZombieDeath))
+        {
+            if (!hasZombieDied)
+            {
+                ZombieDeathSFX.Play();
+                hasZombieDied = true;
+            }
+        }
     }
 
     public void Initialize(GameObject _followTarget)

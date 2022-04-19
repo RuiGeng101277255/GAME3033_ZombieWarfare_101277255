@@ -3633,13 +3633,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f73964a7e66b84dac28638a7ca364f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieDamage: 5
+  zombieDamage: 25
   zombieNavmeshAgent: {fileID: 0}
   zombieAnimator: {fileID: 0}
   zombieSM: {fileID: 0}
   followTarget: {fileID: 0}
-  ZombieGrowl: {fileID: 2596089086298282635}
-  ZombieDeath: {fileID: 5840599570279943927}
+  ZombieGrowlSFX: {fileID: 2596089086298282635}
+  ZombieDeathSFX: {fileID: 5840599570279943927}
 --- !u!114 &7513381253236552453
 MonoBehaviour:
   m_ObjectHideFlags: 0

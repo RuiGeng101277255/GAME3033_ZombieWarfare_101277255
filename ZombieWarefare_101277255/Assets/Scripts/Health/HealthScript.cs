@@ -25,7 +25,8 @@ public class HealthScript : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0.0f, maxHealth);
+
         if (currentHealth <= 0)
         {
             Destroy();

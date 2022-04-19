@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class IconSlot : MonoBehaviour
 {
+    public AudioSource itemConsumptionSFX;
+
     private ItemScript Item;
 
     private Button ItemButton;
@@ -34,6 +36,7 @@ public class IconSlot : MonoBehaviour
 
     public void UseItem()
     {
+        itemConsumptionSFX.Play();
         Debug.Log($"{Item.name} used!");
         Item.UseItem(Item.controller);
     }

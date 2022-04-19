@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public static bool hasWon = false;
     public static bool isInGame = true;
 
+    public AudioSource dingSFX;
+
     private ZombieSpawnManager[] allZombieSpawners;
 
     private static GameManager instance;
@@ -91,6 +93,11 @@ public class GameManager : MonoBehaviour
     {
         if (currentZombieWaves < totalZombieWaves)
         {
+            if (dingSFX != null)
+            {
+                dingSFX.Play();
+            }
+
             allZombieSpawners = FindObjectsOfType<ZombieSpawnManager>();
 
             int zombieToSpawnAtEachSite = currentZombieWaves * 5 + 10;
