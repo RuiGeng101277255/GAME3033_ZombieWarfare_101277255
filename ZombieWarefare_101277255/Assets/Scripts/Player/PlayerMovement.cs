@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody playerRB;
     private Animator playerAnimator;
 
+    public ForceShield playerShield;
+
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -145,6 +147,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnPauseGame(InputValue value)
     {
         PauseGame(!GameManager.Instance().gamePaused);
+    }
+
+    public void OnForceShield(InputValue value)
+    {
+        playerShield.ActivateShield();
     }
 
     private void OnCollisionEnter(Collision collision)
