@@ -13,10 +13,8 @@ public class GameOverUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!GameManager.Instance().cursorActive)
-        {
-            AppEvents.InvokeOnMouseCursorEnable(true);
-        }
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         conditionText.text = (GameManager.Instance().getHasPlayerWon()) ? "YOU SURVIVED!" : "YOU LOST!";
         timerText.text = "Last Wave Time Left: " + (int)GameManager.Instance().getCurrentTime() + "s";

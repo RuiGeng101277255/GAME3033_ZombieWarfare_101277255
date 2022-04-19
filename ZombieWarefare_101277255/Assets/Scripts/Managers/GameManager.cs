@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            ResetManager();
         }
         else
         {
@@ -100,16 +101,19 @@ public class GameManager : MonoBehaviour
 
             allZombieSpawners = FindObjectsOfType<ZombieSpawnManager>();
 
-            int zombieToSpawnAtEachSite = currentZombieWaves * 5 + 10;
+            int zombieToSpawnAtEachSite = currentZombieWaves * 5 + 5;
 
-            foreach (ZombieSpawnManager spawner in allZombieSpawners)
+            if (allZombieSpawners.Length > 0)
             {
-                spawner.spawnNumberOfZombies(zombieToSpawnAtEachSite);
-                currentWaveZombieCount += zombieToSpawnAtEachSite;
-            }
+                foreach (ZombieSpawnManager spawner in allZombieSpawners)
+                {
+                    spawner.spawnNumberOfZombies(zombieToSpawnAtEachSite);
+                    currentWaveZombieCount += zombieToSpawnAtEachSite;
+                }
 
-            currentTime = totalTimePerWave;
-            currentZombieWaves++;
+                currentTime = totalTimePerWave;
+                currentZombieWaves++;
+            }
         }
         else
         {
