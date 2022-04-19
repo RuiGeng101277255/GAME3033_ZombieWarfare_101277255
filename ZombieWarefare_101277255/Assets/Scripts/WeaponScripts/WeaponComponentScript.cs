@@ -17,6 +17,9 @@ public class WeaponComponentScript : MonoBehaviour
     public bool isFiring = false;
     public bool isReloading = false;
 
+    public AudioSource weaponShootSFX;
+    public AudioSource weaponReloadSFX;
+
     protected Camera mainCamera;
     // Start is called before the first frame update
     void Awake()
@@ -72,6 +75,11 @@ public class WeaponComponentScript : MonoBehaviour
     {
         print("firing");
         weaponStats.bulletsInClip--;
+
+        if (weaponShootSFX != null)
+        {
+            weaponShootSFX.Play();
+        }
         //switch statement based on the firing pattern
     }
 
@@ -91,6 +99,11 @@ public class WeaponComponentScript : MonoBehaviour
         if (MuzzleParticle.isPlaying)
         {
             MuzzleParticle.Stop();
+        }
+
+        if (weaponReloadSFX != null)
+        {
+            weaponReloadSFX.Play();
         }
 
         // if there's a firing effect, hide it here

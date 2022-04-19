@@ -13,6 +13,7 @@ public class PlayerHealthScript : HealthScript
 
     public override void Destroy()
     {
-        //base.Destroy();
+        GameManager.Instance().GameOverCondition(false);
+        base.Destroy();
     }
 }

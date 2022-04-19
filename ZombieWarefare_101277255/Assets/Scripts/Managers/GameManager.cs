@@ -7,10 +7,10 @@ public class GameManager : MonoBehaviour
     public bool cursorActive = true;
     public bool gamePaused = false;
     public static int currentZombieWaves = 0;
-    public static int totalZombieWaves = 3;
+    public static int totalZombieWaves = 2;
     public static int currentWaveZombieCount = 0;
     public static float currentTime = 0.0f;
-    public static float totalTimePerWave = 10.0f;
+    public static float totalTimePerWave = 60.0f;
     public static int totalZombiesKilled = 0;
     public static bool hasWon = false;
     public static bool isInGame = true;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void GameOverCondition(bool won)
+    public void GameOverCondition(bool won)
     {
         SceneChanger sceneChange = FindObjectOfType<SceneChanger>();
         if (sceneChange != null)

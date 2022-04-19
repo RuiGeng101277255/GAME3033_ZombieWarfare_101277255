@@ -12,6 +12,9 @@ public class ZombieComponent : MonoBehaviour
     public ZombieStateMachine zombieSM;
     public GameObject followTarget;
 
+    public AudioSource ZombieGrowl;
+    public AudioSource ZombieDeath;
+
     private void Awake()
     {
         zombieAnimator = GetComponent<Animator>();
